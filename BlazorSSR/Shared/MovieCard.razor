@@ -11,10 +11,19 @@
             </p>
         </div>
         <div class="card-footer text-end">
-            <button class="btn btn-primary" data-bs-target="#@ModalId" data-bs-toggle="modal"
-                    @onclick="async () => await OnBtnClick.InvokeAsync(PopularMovie.Id)">
-                More Info
-            </button>
+            @if (UseJSForBtn)
+            {
+                <button class="btn btn-primary" data-bs-target="#movie-modal" data-bs-toggle="modal" onclick="showMovieDetails(this)" data-movieId="@PopularMovie.Id">
+                    More Info
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-primary" data-bs-target="#@ModalId" data-bs-toggle="modal"
+                @onclick="async () => await OnBtnClick.InvokeAsync(PopularMovie.Id)">
+                    More Info
+                </button>
+            }
         </div>
     </div>
 }
@@ -28,4 +37,7 @@
 
     [Parameter]
     public string? ModalId { get; set; }
+
+    [Parameter]
+    public bool UseJSForBtn { get; set; }
 }
