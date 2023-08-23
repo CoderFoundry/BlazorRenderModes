@@ -1,0 +1,86 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>TMDB API Browser</h1>
+
+<div class="my-3 container">
+    <h4>Movies (SSR)</h4>
+    <div>
+        <code>(No rendering attribute)</code>
+    </div>
+    <p>
+        This page is fully server-side rendered and serves static HTML.
+        When navigating to /movies/ssr, you'll wait about 3 seconds before you see any page response
+        when the OnInitializedAsync method completes
+    </p>
+
+    <h4>Movies (Stream)</h4>
+    <div>
+        <code>@("@attribute [StreamRendering(true)]")</code>
+    </div>
+    <p>
+        This page is server-side rendered using streaming rendering. This means the server
+        will send you some HTML immediately and leave the HTTP response stream open until
+        any async operations complete, then send you updated HTML.
+    </p>
+    <p>
+        In this case, you'll see a loading spinner for 3 seconds before the server fetches movies
+        from TMDB and sends an update with the completed page.
+    </p>
+
+    <h4>Movies (SignalR)</h4>
+    <div>
+        <code>@("@attribute [RenderModeServer]")</code>
+    </div>
+    <p>
+        This page uses interactive Blazor components using the Server Render Mode. This means the page
+        and its DOM is rendered on the server, but the server keeps track of the DOM and processes events
+        sent from the browser and dynamically updates the page without needing any sort of page refresh. 
+        Real-time updates are streamed to the browser via the SignalR connection, and user interactions are
+        streamed to the server via the same connection.
+    </p>
+    <p>
+        Notice the delay when navigating to this page as the SignalR connection is established. If the connection
+        is lost, the page will become unresponsive.
+    </p>
+    <p>
+        In this case, the "More Info" button will fetch the details of that movie and display it in a modal.
+        This happens as the result of an EventCallback parameter passed to the MovieCard component using an
+        onclick listener, something usually only possible via JavaScript
+    </p>
+
+    <h4>Movies (WASM)</h4>
+    <div>
+        <code>@("<ClientApp.Pages.MovieListWASM @rendermode=\"@RenderMode.WebAssembly\" />")</code>
+    </div>
+    <p>
+        This page uses interactive Blazor components in Web Assembly. This page will be pre-rendered on the
+        server, but it runs interactively on the client in WASM. Currently, the server .razor component is
+        just for routing - it displays the WASM component in the ClientApp project, which is referenced in
+        the server app's .csproj.
+    </p>
+    <p>
+        In this case, the "More Info" button will fetch the details of that movie and display it in a modal,
+        just like the SignalR component. However, since this is running on the client, there is a minimal API
+        mapped in the server's Program.cs. The WASM component sends a request to our server, which in turn uses
+        the server's API key to send a request to TMDB's API
+    </p>
+
+    <h4>Movies (Auto)</h4>
+    <div>
+        <code>@("<ClientApp.Pages.MovieListWASM @rendermode=\"@RenderMode.Auto\" />")</code>
+    </div>
+    <p>
+        This is the same component used in the WASM page, but now the framework decides where it runs. Sometimes
+        via SignalR, other times in WASM. In testing, the first time the page loads it is typically in SignalR
+        and a reload typically runs in WASM.
+    </p>
+    <p>
+        The component has a <code>Console.WriteLine()</code> that runs after it renders. If it's running in WASM,
+        you'll see the message logged in the JavaScript console. If it's running via SignalR, the message will be
+        logged in the server's terminal output.
+    </p>
+
+
+</div>

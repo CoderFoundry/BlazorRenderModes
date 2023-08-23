@@ -1,0 +1,63 @@
+﻿@inherits LayoutComponentBase
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/index.html">
+                @* <img src="/img/MspectreMark.svg" height="30" alt="developer logo" /> *@
+                &nbsp;Movie List
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/movies/ssr" Match="NavLinkMatch.All">Movies (SSR)</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/movies/stream" Match="NavLinkMatch.All">Movies (Stream)</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/movies/signalr" Match="NavLinkMatch.All">Movies (SignalR)</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/movies/wasm" Match="NavLinkMatch.All">Movies (WASM)</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/movies/auto" Match="NavLinkMatch.All">Movies (Auto)</NavLink>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container-xl py-3">
+    @Body
+</main>
+
+<footer class="footer container-fluid py-3">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-lg-3 align-items-center gy-2">
+            <div class="col text-center text-lg-start">
+                &copy; 2023 Coder Foundry
+            </div>
+            <div class="col text-center">
+                @* <img src="/img/MarkSpectre_WhtLogo.svg" height="25" /> *@
+            </div>
+            <div class="col text-center text-lg-end">
+                <a href="#"><i class="socialicons bi bi-linkedin"></i></a>
+                <a href="#"><i class="socialicons bi bi-github"></i></a>
+                <a href="#"><i class="socialicons bi bi-twitter"></i></a>
+                <a href="#"><i class="socialicons bi bi-envelope-at-fill"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
