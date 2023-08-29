@@ -1,5 +1,19 @@
-html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+:root {
+    --cf-theme-core: #2B404F;
+    --cf-theme-100: hsl(205, 30%, 95%);
+    --cf-theme-150: hsl(205, 30%, 90%);
+    --cf-theme-200: hsl(205, 30%, 85%);
+    --cf-theme-250: hsl(205, 30%, 75%);
+    --cf-theme-300: hsl(205, 30%, 65%);
+    --cf-theme-400: hsl(205, 30%, 55%);
+    --cf-theme-500: hsl(205, 30%, 45%);
+    --cf-theme-600: hsl(205, 30%, 35%);
+    --cf-theme-700: hsl(205, 30%, 25%);
+    --cf-theme-800: hsl(205, 30%, 20%);
+    --cf-theme-900: hsl(205, 30%, 15%);
+    --cf-dark-color: #212121;
+    --cf-light-color: #deeefb;
+    --cf-orange-color: #ff993b;
 }
 
 h1:focus {
@@ -92,32 +106,21 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
-:root {
-    --cf-theme-core: #198754;
-    --cf-theme-100: hsl(152, 38%, 95%);
-    --cf-theme-150: hsl(152, 38%, 90%);
-    --cf-theme-200: hsl(152, 38%, 85%);
-    --cf-theme-300: hsl(152, 38%, 75%);
-    --cf-theme-400: hsl(152, 38%, 65%);
-    --cf-theme-500: hsl(152, 38%, 55%);
-    --cf-theme-600: hsl(152, 38%, 45%);
-    --cf-theme-700: hsl(152, 38%, 35%);
-    --cf-theme-800: hsl(152, 38%, 25%);
-    --cf-theme-850: hsl(152, 38%, 20%);
-    --cf-theme-900: hsl(152, 38%, 15%);
-    --cf-dark-color: #212121;
-    --cf-light-color: #deeefb;
-}
+
+
 
 /* #region Sticky Footer */
 html,
 body {
     height: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
+    background-color: var(--cf-theme-100);
+    color: var(--cf-dark-color);
 }
 
 main {
@@ -137,14 +140,11 @@ footer {
     --bs-btn-hover-border-color: var(--cf-theme-700);
 }
 
-body {
-    background-color: var(--cf-theme-100);
-    color: var(--cf-dark-color);
-}
+
 
 .navbar,
 .footer {
-    background-color: var(--cf-theme-900);
+    background-color: var(--cf-theme-core);
 }
 
 .footer {
@@ -159,5 +159,29 @@ body {
 }
 
     .socialicons:hover {
-        color: var(--cf-theme-core)
+        color: var(--cf-orange-color);
     }
+
+.productionImage {
+    max-width: 300px;
+    padding: .5rem;
+    max-height : 100px;
+}
+
+.imagePosterPlaceHolder{
+    aspect-ratio: 2/3;
+}
+
+.fade-in {
+    animation: fade-in 0.8s ease-in;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

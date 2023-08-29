@@ -44,12 +44,13 @@ async function showMovieDetails(btn) {
         if (!company.logo_path) return;
 
         let companyImg = document.createElement('img');
-        companyImg.classList.add('img-fluid');
         companyImg.src = `https://image.tmdb.org/t/p/w500${company.logo_path}`;
-        companyImg.style.maxHeight = '100px';
+        companyImg.classList.add("productionImage");
 
         let col = document.createElement('div');
-        col.classList.add('col');
+        
+        
+        //col.classList.add('col');
         col.appendChild(companyImg);
 
         productionDiv.appendChild(col);

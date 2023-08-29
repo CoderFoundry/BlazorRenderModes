@@ -16,5 +16,9 @@
 		<ProjectReference Include="..\ClientApp\ClientApp.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\fonts\" />
+	</ItemGroup>
+
 
 </Project>

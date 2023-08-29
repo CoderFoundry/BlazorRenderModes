@@ -1,0 +1,65 @@
+﻿<div class="modal fade" tabindex="-1" id="movie-modal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        <img class="img-fluid rounded" id="modal-img"
+                             src="" />
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <h3 class="display-6 fw-bold mb-0" id="modal-movie-title"></h3>
+                        <span class="lead" id="modal-tagline"></span>
+                        <div class="d-flex gap-1 my-3" id="modal-genres">
+                        </div>
+                        <h5 class="lead fw-bold pt-3 mt-3 border-top">Synopsis</h5>
+                        <p id="modal-overview">
+
+                        </p>
+
+                        <div class="row pt-3 mt-3 border-top">
+                            <div class="col">
+                                <h6>Ratings</h6>
+                                <span id="modal-rating"></span>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <div class="col">
+                                <h6>Release Date</h6>
+                                <span id="modal-released"></span>
+                                <i class="bi bi-calendar"></i>
+                            </div>
+                            <div class="col">
+                                <h6>Budget</h6>
+                                <span id="modal-budget"></span>
+                                <i class="bi bi-bank2"></i>
+                            </div>
+                            <div class="col">
+                                <h6>Runtime</h6>
+                                <span id="modal-runtime"></span>
+                                <i class="bi bi-clock"></i>
+                            </div>
+                        </div>
+
+                        <h5 class="lead fw-bold my-3 pt-3 mt-3 border-top">Production Companies</h5>
+                        <div class="d-flex flex-wrap align-items-center align-items-lg-start" id="modal-production-logos">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex">
+                <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Close</button>
+                <a href="#" target="_blank" class="btn btn-warning" id="modal-imdb">View on IMDB</a>
+                <a href="#" target="_blank" class="btn btn-primary" id="modal-link">Movie Home Page</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}
