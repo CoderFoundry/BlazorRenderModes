@@ -13,19 +13,18 @@
             </div>
             <p>
                 This page is fully server-side rendered and serves static HTML.
-                When navigating to /movies/ssr, we have introduced a delay of 3 seconds before you see any page response
-                when the OnInitializedAsync method completes. This done so you can see you how the page is rendered.
+                When navigating to /movies/ssr, before you see any page response the OnInitializedAsync method has to complete.
             </p>
             <p>
-                SSR render pages return the entire HTML and CSS to the browser. It behaves and operates like an normal webapge. 
-                To see changes you must hit refresh it does not keep any connection the server.               
-            </p>            
+                SSR render pages return the entire HTML and CSS to the browser. It behaves and operates like an normal webapge.
+                To see changes you must hit refresh it does not keep any connection the server.
+            </p>
             <p>
-                In this case, the "More Info" button will fetch the details of that movie and display it in a modal.
-                This happens as the result onclick handler calling a JavaScript function to manipulate the DOM on the modal.
+                The "More Info" button will fetch the details of that movie and display it in a modal.
+                This happens as the result of an onclick handler calling a JavaScript function to manipulate the DOM on the modal.
                 JavaScript is needed for any client side interaction.
             </p>
-           
+
         </div>
         <div class="col-6">
             <h4><a href="/movies/stream">Movies (Stream)</a></h4>
@@ -38,19 +37,39 @@
                 any async operations complete, then send you updated HTML.
             </p>
             <p>
-                In this case, you'll see a placeholder values for 3 seconds before the server fetches movies
-                from TMDB and sends an update with the completed page.
+                In this case, you'll see placeholder values for 3 seconds before the server fetches movies
+                from TMDB and sends an update with the completed page. We introduced this delay intentionally
+                so you can see how the page is rendered.
             </p>
             <p>
-                The more info button is still achieved using JavaScript exactly like the SSR mode.
+                The "More Info" button is still achieved using JavaScript exactly like the SSR mode.
             </p>
-         
+
+        </div>
+        <div class="col-12">
+            <h5>Pros:</h5>
+            <ul>
+                <li>Fewer server resources required</li>
+                <li>
+                    Page renders quickly on the client, especially with the help of Blazor’s “Enhanced Navigation”
+                    Static HTML is a benefit for SEO
+                </li>
+                <li>
+                    Streaming Rendering makes it easy to render placeholder content while long-running async tasks complete on the server
+                </li>
+            </ul>
+            <h5>Cons:</h5>
+            <ul>
+                <li>JavaScript is required for client-side interactivity after the page is rendered</li>
+                <li>No state is held in components</li>
+                <li>Must use form posting, JavaScript, or page navigation to interact with the server</li>
+            </ul>
         </div>
     </div>
     <div class="row mt-3 border shadow">
         <h2>Blazor Server with SignalR</h2>
-        <div class="col">
-            <h4><a href="/movies/signalr">Movies (SignalR)</a></h4>            
+        <div class="col-12">
+            <h4><a href="/movies/signalr">Movies (SignalR)</a></h4>
             <div>
                 <code>@("@attribute [RenderModeServer]")</code>
             </div>
@@ -60,7 +79,7 @@
                 sent from the browser and dynamically updates the page without needing any sort of page refresh.
                 Real-time updates are streamed to the browser via the SignalR connection, and user interactions are
                 streamed to the server via the same connection.
-            </p>            
+            </p>
             <p>
                 In this case, the "More Info" button will fetch the details of that movie and display it in a modal.
                 This happens as the result of an EventCallback parameter passed to the MovieCard component using an
@@ -73,10 +92,25 @@
                 lost to keep the page alive or routed to another endpoint like logout or an index.
             </p>
         </div>
+        <div class="col-12">
+            <h5>Pros:</h5>
+            <ul>
+                <li>The full power of interactive Blazor components, e.g. event handling, component state, callbacks, JS Interop, etc.</li>
+                <li>Secure access to server resources such as services or database queries, since the DOM is managed on the server and all code runs on the server. This means that data can be securely accessed and managed on the server through these components without creating an API endpoint</li>
+                <li>Since state is stored in-memory on the server, form posting and HTTP requests are not required in these components. Any user input is already on the server and can be passed directly to your service layer (note: file uploads are an exception here)</li>
+                <li>Rapid development; developers can create full pages and rich interactions in C# with little to no context switching into JavaScript</li>
+            </ul>
+            <h5>Cons:</h5>
+            <ul>
+                <li>Higher resource usage on the server, as the page state and code execution are maintained and rendered on the server for every client</li>
+                <li>Clients must maintain a web socket connection to the server to use the page. If the connection is lost, the page must be refreshed and page state may be lost</li>
+                <li>Slow/high latency connections to the server can cause latency in user interactions</li>
+            </ul>
+        </div>
     </div>
     <div class="row mt-3 border shadow">
         <h2>Blazor WASM</h2>
-        <div class="col">
+        <div class="col-6">
             <h4><a href="/movies/wasm">Movies (WASM)</a></h4>
             <div>
                 <code>@("<ClientApp.Pages.MovieListWASM @rendermode=\"@RenderMode.WebAssembly\" />")</code>
@@ -94,7 +128,7 @@
                 the server's API key to send a request to TMDB's API
             </p>
         </div>
-        <div class="col">
+        <div class="col-6">
             <h4><a href="/movies/auto">Movies (Auto)</a></h4>
             <div>
                 <code>@("<ClientApp.Pages.MovieListWASM @rendermode=\"@RenderMode.Auto\" />")</code>
@@ -109,6 +143,22 @@
                 you'll see the message logged in the JavaScript console. If it's running via SignalR, the message will be
                 logged in the server's terminal output.
             </p>
+        </div>
+        <div class="col-12">
+            <h5>Pros:</h5>
+            <ul>
+                <li>Highly efficient execution in WebAssembly and immediate UI response, since execution is entirely on the client</li>
+                <li>Decreased resource usage on the server, since the component(s) and runtime are downloaded to the client and rendered by the client. After serving the app, the only load on the server is responding to API requests from the client app</li>
+                <li>Auto Mode means that the user can interact with your Blazor components via whatever method is fastest</li>
+                <li>WASM can support completely offline interaction as long as the component doesn’t need to request data from the server</li>
+            </ul>
+            <h5>Cons:</h5>
+            <ul>
+                <li>Communication with the server must take place via HTTP requests, since components are executing on the client. This means a secure API layer is required to send/retrieve data from the server</li>
+                <li>All code in WASM/Auto components are downloaded to the client, which means any code or resources in WASM components are available to end users. Secrets must be maintained on the server separate from the component</li>
+                <li>Pure WASM components must have their code downloaded along with the .NET WASM runtime before they’re rendered, which can lead to slower page loads.
+                Rendering in Auto Mode circumvents this by rendering the component immediately via SignalR until the WASM runtime is downloaded and ready to execute, then seamlessly transitions to client-side rendering in WASM. If the runtime is already available, components will immediately render in WASM</li>
+            </ul>
         </div>
     </div>
 </div>
