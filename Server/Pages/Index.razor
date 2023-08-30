@@ -64,6 +64,13 @@
                 <li>No state is held in components</li>
                 <li>Must use form posting, JavaScript, or page navigation to interact with the server</li>
             </ul>
+            <h5>Common Use Cases:</h5>
+            <ul>
+                <li>Landing pages</li>
+                <li>Contact page</li>
+                <li>Dashboards</li>
+                <li>Content that is generally read-only</li>
+            </ul>
         </div>
     </div>
     <div class="row mt-3 border shadow">
@@ -106,6 +113,13 @@
                 <li>Clients must maintain a web socket connection to the server to use the page. If the connection is lost, the page must be refreshed and page state may be lost</li>
                 <li>Slow/high latency connections to the server can cause latency in user interactions</li>
             </ul>
+            <h5>Common Use Cases:</h5>
+            <ul>
+                <li>Secure data access</li>
+                <li>Rendering/streaming large datasets from the database</li>
+                <li>Thin-client applications</li>
+                <li>Rapid Prototyping, B2B, or internal business applications</li>
+            </ul>
         </div>
     </div>
     <div class="row mt-3 border shadow">
@@ -113,7 +127,7 @@
         <div class="col-6">
             <h4><a href="/movies/wasm">Movies (WASM)</a></h4>
             <div>
-                <code>@("<ClientApp.Pages.MovieListWASM @rendermode=\"@RenderMode.WebAssembly\" />")</code>
+                <code>@("<Client.Pages.MovieListWASM @rendermode=\"@RenderMode.WebAssembly\" />")</code>
             </div>
             <p>
                 This page uses interactive Blazor components in Web Assembly. This page will be pre-rendered on the
@@ -131,7 +145,7 @@
         <div class="col-6">
             <h4><a href="/movies/auto">Movies (Auto)</a></h4>
             <div>
-                <code>@("<ClientApp.Pages.MovieListWASM @rendermode=\"@RenderMode.Auto\" />")</code>
+                <code>@("<Client.Pages.MovieListWASM @rendermode=\"@RenderMode.Auto\" />")</code>
             </div>
             <p>
                 This is the same component used in the WASM page, but now the framework decides where it runs. Sometimes
@@ -158,6 +172,13 @@
                 <li>All code in WASM/Auto components are downloaded to the client, which means any code or resources in WASM components are available to end users. Secrets must be maintained on the server separate from the component</li>
                 <li>Pure WASM components must have their code downloaded along with the .NET WASM runtime before they’re rendered, which can lead to slower page loads.
                 Rendering in Auto Mode circumvents this by rendering the component immediately via SignalR until the WASM runtime is downloaded and ready to execute, then seamlessly transitions to client-side rendering in WASM. If the runtime is already available, components will immediately render in WASM</li>
+            </ul>
+            <h5>Common Use Cases:</h5>
+            <ul>
+                <li>Large scale consumer web applications</li>
+                <li>Applications with offline support or PWAs</li>
+                <li>Front ends for existing Web APIs</li>
+                <li>Computationally expensive applications</li>
             </ul>
         </div>
     </div>
