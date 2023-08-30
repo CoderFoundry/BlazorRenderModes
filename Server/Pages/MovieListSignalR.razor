@@ -43,7 +43,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //await Task.Delay(3000);
+        await Task.Delay(3000);
         MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>("movie/popular");
     }
 
@@ -58,7 +58,7 @@ else
         MovieDetails = null;
         StateHasChanged();
 
-        //await Task.Delay(1000);
+        await Task.Delay(2000);
 
         MovieDetails = await Http.GetFromJsonAsync<MovieDetails>($"movie/{id}");
         StateHasChanged();
