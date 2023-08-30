@@ -1,0 +1,94 @@
+﻿@using Client.Models;
+
+<div class="modal fade" tabindex="-1" id="movie-modal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @if (MovieDetails is null)
+                {
+                    <div class="h-100 d-flex flex-column gap-3 justify-content-center align-items-center">
+                        <h3>Loading...</h3>
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <img class="img-fluid rounded shadow" id="modal-img"
+                                 src="@($"https://image.tmdb.org/t/p/w500{MovieDetails.PosterPath}")" />
+                        </div>
+                        <div class="col-md-8">
+                            <h3 class="display-6 fw-bold mb-0">@MovieDetails.Title</h3>
+                            <span class="lead">@MovieDetails.Tagline</span>
+                            <div class="d-flex gap-1 my-3" id="modal-genres">
+                                @foreach (var genre in MovieDetails.Genres)
+                                {
+                                    <span class="badge text-bg-primary">@genre.Name</span>
+                                }
+                            </div>
+                            <h5 class="lead fw-bold pt-3 mt-3 border-top">Synopsis</h5>
+                            <p>
+                                @MovieDetails.Overview
+                            </p>
+
+                            <div class="row pt-3 mt-3 border-top">
+                                <div class="col">
+                                    <h6>Ratings</h6>
+                                    <span id="modal-rating">@MovieDetails.VoteAverage</span>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <div class="col">
+                                    <h6>Release Date</h6>
+                                    <span id="modal-released">@(DateTime.Parse(MovieDetails.ReleaseDate!).ToShortDateString())</span>
+                                    <i class="bi bi-calendar"></i>
+                                </div>
+                                <div class="col">
+                                    <h6>Budget</h6>
+                                    <span id="modal-budget">@MovieDetails.Budget.ToString("C")</span>
+                                    <i class="bi bi-bank2"></i>
+                                </div>
+                                <div class="col">
+                                    <h6>Runtime</h6>
+                                    <span id="modal-runtime">@(MovieDetails.Runtime / 60) hour @(MovieDetails.Runtime % 60) minutes</span>
+                                    <i class="bi bi-clock"></i>
+                                </div>
+                            </div>
+
+                            <h5 class="lead fw-bold my-3 pt-3 mt-3 border-top">Production Companies</h5>
+                            <div class="d-flex flex-wrap align-items-center align-items-lg-start" id="modal-production-logos">
+                                @foreach (var company in MovieDetails.ProductionCompanies.Where(c => !string.IsNullOrEmpty(c.LogoPath)))
+                                {
+                                    <div>
+                                        <img class="productionImage"
+                                             src="@($"https://image.tmdb.org/t/p/w500{company.LogoPath}")" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer d-flex">
+                <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Close</button>
+                @if (MovieDetails is not null)
+                {
+                    <a href="@($"https://www.imdb.com/title/{MovieDetails.ImdbId}")" target="_blank" class="btn btn-warning">View on IMDB</a>
+                    <a href="@MovieDetails.Homepage" target="_blank" class="btn btn-primary">Movie Home Page</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    
+    [Parameter]
+    public MovieDetails? MovieDetails { get; set; }
+}

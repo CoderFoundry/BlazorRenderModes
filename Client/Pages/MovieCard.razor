@@ -1,0 +1,49 @@
+﻿@using Client.Models;
+
+@if (PopularMovie is not null)
+{
+    <div class="card h-100 fade-in">
+        <img class="card-img-top" alt="Movie Poster" src="@($"https://image.tmdb.org/t/p/w500{PopularMovie.PosterPath}")" />
+        <div class="card-body border-top bg-light">
+            <h5 class="card-title">@PopularMovie.Title</h5>
+            <p class="card-text">
+                @DateTime.Parse(PopularMovie.ReleaseDate).ToString("MMM dd yyy")
+            </p>
+        </div>
+        <div class="card-footer text-end">           
+                <button class="btn btn-primary" data-bs-target="#@ModalId" data-bs-toggle="modal"
+                @onclick="async () => await OnBtnClick.InvokeAsync(PopularMovie.Id)">
+                    More Info
+                </button>          
+        </div>
+    </div>
+} else
+{
+    <div class="card h-100">
+        <img class="card-img-top" alt="Movie Poster" src="/img/PosterPlaceHolder.png" />
+        <div class="card-body border-top bg-light">
+            <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+            </h5>
+            <p class="card-text placeholder-glow">
+                <span class="placeholder col-8"></span>
+            </p>
+        </div>
+        <div class="card-footer text-end">
+            <button class="btn btn-primary disabled placeholder col-6">
+                More Info
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public PopularMovie? PopularMovie { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnBtnClick { get; set; }
+
+    [Parameter]
+    public string? ModalId { get; set; }
+}

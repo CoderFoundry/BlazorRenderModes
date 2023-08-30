@@ -1,0 +1,46 @@
+﻿@using Server.Models;
+@page "/movies/stream"
+@attribute [StreamRendering(true)]
+
+@inject HttpClient Http
+<h1 class="text-center mt-5 display-3">Popular Movies</h1>
+@if (MovieResponse is null)
+{
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
+
+        @for (int i = 1; i <= 8; i++)
+        {
+            <div class="col">
+                <MovieCard />
+            </div>
+        }
+
+    </div>
+}
+else
+{
+   
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
+
+        @foreach (var movie in MovieResponse.Results.Take(8))
+        {
+            <div class="col">
+                <MovieCard PopularMovie="movie" UseJSForBtn="true" />
+            </div>
+        }
+
+    </div>
+    <MovieModalJS />
+}
+
+
+@code {
+    private PopularMovieResponse? MovieResponse { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //await Task.Delay(3000);
+        MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>("movie/popular");
+    }
+}

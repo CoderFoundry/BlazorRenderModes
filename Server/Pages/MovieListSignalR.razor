@@ -1,0 +1,65 @@
+﻿@using Server.Models;
+@page "/movies/signalr"
+@attribute [RenderModeServer]
+
+@inject HttpClient Http
+
+<h1 class="text-center mt-5 display-3">Popular Movies</h1>
+@if (MovieResponse is null)
+{
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
+
+         @for (int i = 1; i <= 8; i++)
+        {
+            <div class="col" >
+                <MovieCard/>
+            </div>
+        }        
+
+    </div>
+}
+else
+{
+    
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
+
+        @foreach (var movie in MovieResponse.Results.Take(8))
+        {
+            <div class="col" @key="movie.Id">
+                <MovieCard PopularMovie="movie" ModalId="movie-modal" OnBtnClick="GetMovieDetails" />
+            </div>
+        }
+
+    </div>
+
+    <MovieModal MovieDetails="MovieDetails" />
+}
+
+@code {
+    private PopularMovieResponse? MovieResponse { get; set; }
+
+    private MovieDetails? MovieDetails { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(3000);
+        MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>("movie/popular");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Console.WriteLine("Hello from Server component");
+    }
+
+
+    private async Task GetMovieDetails(int id)
+    {
+        MovieDetails = null;
+        StateHasChanged();
+
+        //await Task.Delay(1000);
+
+        MovieDetails = await Http.GetFromJsonAsync<MovieDetails>($"movie/{id}");
+        StateHasChanged();
+    }
+}
