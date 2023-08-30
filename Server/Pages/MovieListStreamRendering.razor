@@ -4,6 +4,7 @@
 
 @inject HttpClient Http
 <h1 class="text-center mt-5 display-3">Popular Movies</h1>
+<div class="container-xl">
 @if (MovieResponse is null)
 {
 
@@ -33,7 +34,7 @@ else
     </div>
     <MovieModalJS />
 }
-
+</div>
 
 @code {
     private PopularMovieResponse? MovieResponse { get; set; }

@@ -2,19 +2,19 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Blazor Render Modes</h1>
-
-<div class="my-3 container-xl">
-    <div class="row mt-3 border">
-        <div class="col">
-            <h4>Movies (SSR)</h4>
+<div class="my-1 container-fluid px-5">
+    <h1>Blazor Render Modes</h1>
+    <div class="row mt-3 border shadow">
+        <h2>Server Side Rendered (SSR)</h2>
+        <div class="col-6">
+            <h4><a href="/movies/ssr">Movies (SSR)</a></h4>
             <div>
                 <code>(No rendering attribute)</code>
             </div>
             <p>
                 This page is fully server-side rendered and serves static HTML.
                 When navigating to /movies/ssr, we have introduced a delay of 3 seconds before you see any page response
-                when the OnInitializedAsync method completes. This done to show you have the page is rendered.
+                when the OnInitializedAsync method completes. This done so you can see you how the page is rendered.
             </p>
             <p>
                 SSR render pages return the entire HTML and CSS to the browser. It behaves and operates like an normal webapge. 
@@ -27,8 +27,8 @@
             </p>
            
         </div>
-        <div class="col">
-            <h4>Movies (Stream)</h4>
+        <div class="col-6">
+            <h4><a href="/movies/stream">Movies (Stream)</a></h4>
             <div>
                 <code>@("@attribute [StreamRendering(true)]")</code>
             </div>
@@ -47,9 +47,10 @@
          
         </div>
     </div>
-    <div class="row mt-3 border">
+    <div class="row mt-3 border shadow">
+        <h2>Blazor Server with SignalR</h2>
         <div class="col">
-            <h4>Movies (SignalR)</h4>
+            <h4><a href="/movies/signalr">Movies (SignalR)</a></h4>            
             <div>
                 <code>@("@attribute [RenderModeServer]")</code>
             </div>
@@ -73,9 +74,10 @@
             </p>
         </div>
     </div>
-    <div class="row mt-3 border">
+    <div class="row mt-3 border shadow">
+        <h2>Blazor WASM</h2>
         <div class="col">
-            <h4>Movies (WASM)</h4>
+            <h4><a href="/movies/wasm">Movies (WASM)</a></h4>
             <div>
                 <code>@("<ClientApp.Pages.MovieListWASM @rendermode=\"@RenderMode.WebAssembly\" />")</code>
             </div>
@@ -93,7 +95,7 @@
             </p>
         </div>
         <div class="col">
-            <h4>Movies (Auto)</h4>
+            <h4><a href="/movies/auto">Movies (Auto)</a></h4>
             <div>
                 <code>@("<ClientApp.Pages.MovieListWASM @rendermode=\"@RenderMode.Auto\" />")</code>
             </div>
