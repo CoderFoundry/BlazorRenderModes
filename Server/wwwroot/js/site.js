@@ -15,6 +15,7 @@ async function showMovieDetails(btn) {
 
     let movieId = btn.getAttribute('data-movieId');
 
+    //call our minimal api to get the movie details
     let movie = await getMovie(movieId);
 
     document.getElementById('modal-title').textContent = movie.title;

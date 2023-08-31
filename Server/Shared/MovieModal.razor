@@ -41,8 +41,7 @@
                             <div class="row pt-3 mt-3 border-top">
                                 <div class="col">
                                     <h6>Ratings</h6>
-                                    <span id="modal-rating">@MovieDetails.VoteAverage</span>
-                                    <i class="bi bi-star-fill"></i>
+                                    <span id="modal-rating">@(Math.Round(MovieDetails.VoteAverage, 1) * 10)%</span>                                    
                                 </div>
                                 <div class="col">
                                     <h6>Release Date</h6>
@@ -51,7 +50,7 @@
                                 </div>
                                 <div class="col">
                                     <h6>Budget</h6>
-                                    <span id="modal-budget">@MovieDetails.Budget.ToString("C")</span>
+                                    <span id="modal-budget">@MovieDetails.Budget.ToString("#,##0,,M")</span>
                                     <i class="bi bi-bank2"></i>
                                 </div>
                                 <div class="col">
