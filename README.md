@@ -17,7 +17,7 @@ https://developer.themoviedb.org/docs
 To add your TMDBAPI key to the project you will navigate to the server project and edit program.cs 
 You can add your key to the file or use user secrets like we did. We set the string variable with the value using a user secret. 
 
-```
+``` cpp
 // your TMDB Read Access key must be in the server's secrets.json, e.g.:
 // "TMDBKey": "your-API-key-here"
 string tmdbKey = builder.Configuration["TMDBKey"];
