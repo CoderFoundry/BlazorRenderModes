@@ -5,7 +5,7 @@
 [<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/1706203/266028119-0e52140c-db7c-40a9-920a-f10aa5b1f6bb.jpg" width="50%">](https://www.youtube.com/watch?v=u4azTLLGt8U "Blazor Render Modes")
 
 # SSR Walkthrough Video
-[<img src="https://github.com/CoderFoundry/BlazorRenderModes/assets/1706203/b510ab99-a1a8-4f8a-8714-859425987757" width="50%">](https://www.youtube.com/watch?v=2kGR1lgEL50 "Blazor Render Modes")
+[<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/1706203/267058156-b510ab99-a1a8-4f8a-8714-859425987757.png" width="50%">](https://www.youtube.com/watch?v=2kGR1lgEL50 "Blazor Render Modes")
 
 Blazor has 5 render modes. SSR Server Side Render, SSR Streaming Rendering, Blazor Server with SignalR, Blazor Wasm, Blazor Auto.
 This repo has created demos for each render type.
