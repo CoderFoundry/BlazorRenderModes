@@ -10,7 +10,7 @@
 Blazor has 5 render modes. SSR Server Side Render, SSR Streaming Rendering, Blazor Server with SignalR, Blazor Wasm, Blazor Auto.
 This repo has created demos for each render type.
 
-The app has been built with .net 8 preview 7. You will need to download and install Visual Studio Preview and the .net 8 SDK to be able to run the sample.
+The app has been built with .net 8 preview 7. To run the sample, you must download and install Visual Studio Preview and the .net 8 SDK.
 
 Download Visual Studio Preview
 https://visualstudio.microsoft.com/vs/preview/#download-preview
