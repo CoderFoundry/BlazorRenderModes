@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+string tmdbKey = builder.Configuration["TMDBKey"];
+var settings = new Client.Models.AppSettings { TMDBKey = tmdbKey };
+builder.Services.AddSingleton(settings);
+
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();

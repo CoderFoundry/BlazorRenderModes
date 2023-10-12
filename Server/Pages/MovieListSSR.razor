@@ -2,34 +2,35 @@
 @page "/movies/ssr"
 
 @inject HttpClient Http
+@inject Client.Models.AppSettings Settings
 
 <h1 class="text-center mt-3 display-3">Popular Movies</h1>
 <div class="container-xl">
-@if (MovieResponse is null)
-{
-    <div class="h-100 d-flex flex-column gap-3 justify-content-center align-items-center">
-        <h3>Loading...</h3>
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
-}
-else
-{
-    
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
-
-        @foreach (var movie in MovieResponse.Results.Take(8))
-        {
-            <div class="col">
-                <MovieCard PopularMovie="movie" UseJSForBtn="true" />
+    @if (MovieResponse is null)
+    {
+        <div class="h-100 d-flex flex-column gap-3 justify-content-center align-items-center">
+            <h3>Loading...</h3>
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
-        }
+        </div>
+    }
+    else
+    {
 
-    </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
 
-    <MovieModalJS />
-}
+            @foreach (var movie in MovieResponse.Results.Take(8))
+            {
+                <div class="col">
+                    <MovieCard PopularMovie="movie" UseJSForBtn="true" />
+                </div>
+            }
+
+        </div>
+
+        <MovieModalJS />
+    }
 
 </div>
 
@@ -39,6 +40,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         await Task.Delay(3000);
-        MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>("movie/popular");
+        MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>($"movie/popular?api_key={Settings.TMDBKey}");
     }
 }
