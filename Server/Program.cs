@@ -41,7 +41,7 @@ app.MapRazorComponents<App>()
 
 app.MapGet("/movie/popular", async ([FromServices] HttpClient http) =>
 {
-    PopularMovieResponse? response = await http.GetFromJsonAsync<PopularMovieResponse>($"movie/popular");
+    PopularMovieResponse? response = await http.GetFromJsonAsync<PopularMovieResponse>("movie/popular");
 
     return response is not null ? Results.Ok(response) : Results.Problem();
 });
