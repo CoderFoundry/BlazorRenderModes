@@ -1,7 +1,7 @@
 ﻿@using BlazorRenderModes.Client.Models;
-@page "/movies/wasm"
+@page "/movies/auto"
 @inject HttpClient Http
-@rendermode InteractiveWebAssembly
+@attribute [RenderModeInteractiveAuto]
 
 <h1 class="text-center mt-5 display-3">Popular Movies</h1>
 <div class="container-xl">
@@ -20,7 +20,8 @@
     }
     else
     {
-
+        <button @onclick="() => clicked = !clicked">Click here</button>
+        <p class="text-success">@clicked</p>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
 
             @foreach (var movie in MovieResponse.Results.Take(8))
@@ -41,6 +42,8 @@
 
     private MovieDetails? MovieDetails { get; set; }
 
+    private bool clicked;
+
     protected override async Task OnInitializedAsync()
     {
         //await Task.Delay(3000);
@@ -51,7 +54,9 @@
     {
         if (firstRender)
         {
-            Console.WriteLine("Hello from WASM component");
+            Console.WriteLine("Hello from Auto component");
+            Console.WriteLine("If this is in your browser console, this is rendered in WebAssembly");
+            Console.WriteLine("If this is in your server's console, this is rendered via SignalR");
         }
     }
 

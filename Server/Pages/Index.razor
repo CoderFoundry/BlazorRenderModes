@@ -78,7 +78,7 @@
         <div class="col-12">
             <h4><a href="/movies/signalr">Movies (SignalR)</a></h4>
             <div>
-                <code>@("@attribute [RenderModeServer]")</code>
+                <code>@("@rendermode InteractiveServer")</code>
             </div>
             <p>
                 This page uses interactive Blazor components using the Server Render Mode. This means the page
@@ -127,7 +127,7 @@
         <div class="col-6">
             <h4><a href="/movies/wasm">Movies (WASM)</a></h4>
             <div>
-                <code>@("<Client.Pages.MovieListWASM @rendermode=\"@RenderMode.WebAssembly\" />")</code>
+                <code>@("@rendermode InteractiveWebAssembly")</code>
             </div>
             <p>
                 This page uses interactive Blazor components in Web Assembly. This page will be pre-rendered on the
@@ -145,7 +145,7 @@
         <div class="col-6">
             <h4><a href="/movies/auto">Movies (Auto)</a></h4>
             <div>
-                <code>@("<Client.Pages.MovieListWASM @rendermode=\"@RenderMode.Auto\" />")</code>
+                <code>@("@rendermode InteractiveAuto")</code>
             </div>
             <p>
                 This is the same component used in the WASM page, but now the framework decides where it runs. Sometimes

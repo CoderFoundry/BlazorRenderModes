@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Client.Models
+namespace BlazorRenderModes.Client.Models
 {
     public class PopularMovie
     {

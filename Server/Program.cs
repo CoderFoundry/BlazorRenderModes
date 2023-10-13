@@ -1,13 +1,14 @@
-using Server;
-using Server.Models;
+using BlazorRenderModes.Models;
 using Microsoft.AspNetCore.Mvc;
+using BlazorRenderModes.Client.Pages;
+using BlazorRenderModes;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddServerComponents()
-    .AddWebAssemblyComponents();
+    .AddInteractiveServerComponents()
+    .AddInteractiveWebAssemblyComponents();
 
 // your TMDB Read Access key must be in the server's secrets.json, e.g.:
 // "TMDBKey": "your-API-key-here"
@@ -33,10 +34,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddServerRenderMode()
-    .AddWebAssemblyRenderMode();
+    .AddInteractiveServerRenderMode()
+    .AddInteractiveWebAssemblyRenderMode()
+    .AddAdditionalAssemblies(typeof(MovieListWASM).Assembly);
 
 app.MapGet("/movie/popular", async ([FromServices] HttpClient http) =>
 {

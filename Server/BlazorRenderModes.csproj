@@ -5,13 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>2cdef583-bade-4f2d-a295-51760eb701bf</UserSecretsId>
-	<RazorLangVersion>8.0</RazorLangVersion>
   </PropertyGroup>
 
 
 	<ItemGroup>
-		<ProjectReference Include="..\Client\Client.csproj" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.1.23421.29" />
+		<ProjectReference Include="..\Client\BlazorRenderModes.Client.csproj" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.2.23480.2" />
 	</ItemGroup>
 
 	<ItemGroup>
