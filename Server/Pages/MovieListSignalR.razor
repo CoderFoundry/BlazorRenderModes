@@ -3,7 +3,6 @@
 @rendermode RenderMode.InteractiveServer
 
 @inject HttpClient Http
-@inject Client.Models.AppSettings Settings
 
 <h1 class="text-center mt-5 display-3">Popular Movies</h1>
 <div class="container-xl">
@@ -45,7 +44,7 @@
     protected override async Task OnInitializedAsync()
     {
         await Task.Delay(3000);
-        MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>($"movie/popular?api_key={Settings.TMDBKey}");
+        MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>("movie/popular");
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -61,7 +60,7 @@
 
         await Task.Delay(2000);
 
-        MovieDetails = await Http.GetFromJsonAsync<MovieDetails>($"movie/{id}?api_key={Settings.TMDBKey}");
+        MovieDetails = await Http.GetFromJsonAsync<MovieDetails>($"movie/{id}");
         StateHasChanged();
     }
 }

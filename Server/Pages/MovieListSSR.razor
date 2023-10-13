@@ -2,7 +2,6 @@
 @page "/movies/ssr"
 
 @inject HttpClient Http
-@inject Client.Models.AppSettings Settings
 
 <h1 class="text-center mt-3 display-3">Popular Movies</h1>
 <div class="container-xl">
@@ -40,6 +39,6 @@
     protected override async Task OnInitializedAsync()
     {
         await Task.Delay(3000);
-        MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>($"movie/popular?api_key={Settings.TMDBKey}");
+        MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>("movie/popular");
     }
 }
