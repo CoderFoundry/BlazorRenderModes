@@ -1,7 +1,7 @@
 ﻿@using BlazorRenderModes.Client.Models;
 @page "/movies/wasm"
 @inject HttpClient Http
-@rendermode InteractiveWebAssembly
+@attribute [RenderModeInteractiveWebAssembly(prerender: false)]
 
 <h1 class="text-center mt-5 display-3">Popular Movies</h1>
 <div class="container-xl">

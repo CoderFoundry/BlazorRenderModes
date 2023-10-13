@@ -1,0 +1,34 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="/img/BlazorMovieOrg.png" height="50" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/movies/ssr" Match="NavLinkMatch.All">Movies (SSR)</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/movies/stream" Match="NavLinkMatch.All">Movies (Stream)</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/movies/signalr" Match="NavLinkMatch.All">Movies (SignalR)</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/movies/wasm" Match="NavLinkMatch.All">Movies (WASM)</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/movies/auto" Match="NavLinkMatch.All">Movies (Auto)</NavLink>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

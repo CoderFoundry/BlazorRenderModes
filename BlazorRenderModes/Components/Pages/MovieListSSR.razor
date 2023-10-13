@@ -1,27 +1,23 @@
-﻿@using BlazorRenderModes.Models;
-@page "/movies/stream"
-@attribute [StreamRendering(true)]
+﻿@using BlazorRenderModes.Client.Components
+@using BlazorRenderModes.Client.Models
+@page "/movies/ssr"
 
 @inject HttpClient Http
-<h1 class="text-center mt-5 display-3">Popular Movies</h1>
+
+<h1 class="text-center mt-3 display-3">Popular Movies</h1>
 <div class="container-xl">
 @if (MovieResponse is null)
 {
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
-
-        @for (int i = 1; i <= 8; i++)
-        {
-            <div class="col">
-                <MovieCard />
-            </div>
-        }
-
+    <div class="h-100 d-flex flex-column gap-3 justify-content-center align-items-center">
+        <h3>Loading...</h3>
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
 }
 else
 {
-   
+    
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
 
         @foreach (var movie in MovieResponse.Results.Take(8))
@@ -32,8 +28,10 @@ else
         }
 
     </div>
+
     <MovieModalJS />
 }
+
 </div>
 
 @code {
@@ -41,7 +39,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(3000);
+        //await Task.Delay(3000);
         MovieResponse = await Http.GetFromJsonAsync<PopularMovieResponse>("movie/popular");
     }
 }

@@ -1,7 +1,7 @@
-using BlazorRenderModes.Models;
+using BlazorRenderModes.Client.Models;
 using Microsoft.AspNetCore.Mvc;
-using BlazorRenderModes.Client.Pages;
-using BlazorRenderModes;
+using BlazorRenderModes.Client.Components.Pages;
+using BlazorRenderModes.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddRazorComponents()
 
 // your TMDB Read Access key must be in the server's secrets.json, e.g.:
 // "TMDBKey": "your-API-key-here"
-string tmdbKey = builder.Configuration["TMDBKey"];
+string? tmdbKey = builder.Configuration["TMDBKey"];
 
 builder.Services.AddScoped(sp => {
     var client = new HttpClient();

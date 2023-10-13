@@ -1,0 +1,30 @@
+﻿@inherits LayoutComponentBase
+
+<header>
+    <NavMenu />
+</header>
+
+<main class="container-fluid py-3">
+    @Body
+</main>
+
+<footer class="footer container-fluid py-3">
+    <div class="px-3">
+        <div class="row row-cols-1 row-cols-lg-3 align-items-center gy-2">
+            <div class="col text-center text-lg-start">
+                <img src="/img/BlazorMovieorg.png" height="50"/>
+                &copy; 2023 Coder Foundry
+            </div>
+            <div class="col text-center">
+                <div><img src="/img/THEMOVEDBLogo.svg" height="25"/></div>
+                <div>This product uses the TMDB API but is not endorsed or certified by TMDB.</div>
+            </div>
+            <div class="col text-center text-lg-end">
+                <a href="https://rb.gy/3d3ov"><i class="socialicons bi bi-youtube"></i></a>
+                <a href="https://github.com/CoderFoundry"><i class="socialicons bi bi-github"></i></a>
+                <a href="#"><i class="socialicons bi bi-twitter"></i></a>                
+            </div>
+        </div>
+    </div>
+</footer>
+

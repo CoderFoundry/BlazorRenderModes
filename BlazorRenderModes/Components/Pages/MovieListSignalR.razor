@@ -1,7 +1,9 @@
-﻿@using BlazorRenderModes.Client.Models;
-@page "/movies/auto"
+﻿@using BlazorRenderModes.Client.Components
+@using BlazorRenderModes.Client.Models;
+@page "/movies/signalr"
+@rendermode InteractiveServer
+
 @inject HttpClient Http
-@attribute [RenderModeInteractiveAuto]
 
 <h1 class="text-center mt-5 display-3">Popular Movies</h1>
 <div class="container-xl">
@@ -20,8 +22,7 @@
     }
     else
     {
-        <button @onclick="() => clicked = !clicked">Click here</button>
-        <p class="text-success">@clicked</p>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
 
             @foreach (var movie in MovieResponse.Results.Take(8))
@@ -36,13 +37,10 @@
         <MovieModal MovieDetails="MovieDetails" />
     }
 </div>
-
 @code {
     private PopularMovieResponse? MovieResponse { get; set; }
 
     private MovieDetails? MovieDetails { get; set; }
-
-    private bool clicked;
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,18 +52,18 @@
     {
         if (firstRender)
         {
-            Console.WriteLine("Hello from Auto component");
-            Console.WriteLine("If this is in your browser console, this is rendered in WebAssembly");
-            Console.WriteLine("If this is in your server's console, this is rendered via SignalR");
+            // this should appear in your server's console
+            Console.WriteLine("Hello from Server component");
         }
     }
+
 
     private async Task GetMovieDetails(int id)
     {
         MovieDetails = null;
         StateHasChanged();
 
-        //await Task.Delay(1000);
+        //await Task.Delay(2000);
 
         MovieDetails = await Http.GetFromJsonAsync<MovieDetails>($"movie/{id}");
         StateHasChanged();

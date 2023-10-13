@@ -1,4 +1,4 @@
-﻿@using BlazorRenderModes.Models;
+﻿@using BlazorRenderModes.Client.Models
 
 <div class="modal fade" tabindex="-1" id="movie-modal">
     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -41,7 +41,7 @@
                             <div class="row pt-3 mt-3 border-top">
                                 <div class="col">
                                     <h6>Ratings</h6>
-                                    <span id="modal-rating">@(Math.Round(MovieDetails.VoteAverage, 1) * 10)%</span>                                    
+                                    <span id="modal-rating">@(Math.Round(MovieDetails.VoteAverage, 1) * 10)%</span>
                                 </div>
                                 <div class="col">
                                     <h6>Release Date</h6>
@@ -87,7 +87,7 @@
 </div>
 
 @code {
-    
+
     [Parameter]
     public MovieDetails? MovieDetails { get; set; }
 }
