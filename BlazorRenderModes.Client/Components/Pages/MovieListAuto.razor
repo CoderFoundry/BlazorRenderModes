@@ -1,7 +1,7 @@
 ﻿@using BlazorRenderModes.Client.Models;
 @page "/movies/auto"
 @inject HttpClient Http
-@attribute [RenderModeInteractiveAuto(prerender: false)]
+@rendermode RenderMode.InteractiveAuto
 
 <h1 class="text-center mt-5 display-3">Popular Movies</h1>
 <div class="container-xl">
