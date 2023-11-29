@@ -22,27 +22,30 @@
             <p>
                 The "More Info" button will fetch the details of that movie and display it in a modal.
                 This happens as the result of an onclick handler calling a JavaScript function to manipulate the DOM on the modal.
-                JavaScript is needed for any client side interaction.
+                JavaScript is needed for any client side interaction when using SSR.
             </p>
 
         </div>
         <div class="col-6">
             <h4><a href="/movies/stream">Movies (Stream)</a></h4>
             <div>
-                <code>@("@attribute [StreamRendering(true)]")</code>
+                <code>@("@attribute [StreamRendering]")</code>
             </div>
             <p>
                 This page is server-side rendered using streaming rendering. This means the server
                 will send you some HTML immediately and leave the HTTP response stream open until
-                any async operations complete, then send you updated HTML.
+                any async operations complete, then send you updated HTML. The updated HTML will be patched
+                into the DOM by Blazor, rather than reloading the page.
             </p>
             <p>
-                In this case, you'll see placeholder values for 3 seconds before the server fetches movies
-                from TMDB and sends an update with the completed page. We introduced this delay intentionally
-                so you can see how the page is rendered.
+                In this case, you'll see placeholder content while the server fetches movies
+                from TMDB and sends an update with the completed page. To see this happen more
+                clearly, uncomment the delay in MovieListStreamRendering.razor.
             </p>
             <p>
                 The "More Info" button is still achieved using JavaScript exactly like the SSR mode.
+                Stream Rendering is an enhancement of plain SSR, so any interactive elements of the
+                page after it has reached the browser must still be handled with JavaScript.
             </p>
 
         </div>
@@ -78,10 +81,10 @@
         <div class="col-12">
             <h4><a href="/movies/signalr">Movies (SignalR)</a></h4>
             <div>
-                <code>@("@rendermode InteractiveServer")</code>
+                <code>@("@rendermode RenderMode.InteractiveServer")</code>
             </div>
             <p>
-                This page uses interactive Blazor components using the Server Render Mode. This means the page
+                This page uses interactive Blazor components using the Interactive Server Render Mode. This means the page
                 and its DOM is rendered on the server, but the server keeps track of the DOM and processes events
                 sent from the browser and dynamically updates the page without needing any sort of page refresh.
                 Real-time updates are streamed to the browser via the SignalR connection, and user interactions are
@@ -91,6 +94,9 @@
                 In this case, the "More Info" button will fetch the details of that movie and display it in a modal.
                 This happens as the result of an EventCallback parameter passed to the MovieCard component using an
                 onclick listener, something usually only possible via JavaScript. No JavaScript is needed to display the modal.
+                Because this code is running entirely on the server, the request to TMDB's API is also made on the server,
+                keeping the API key secret from the client. The client also cannot see or modify the code that is executed,
+                since it is completely on the server.
             </p>
             <p>
                 Note: There is a delay when navigating to this page as the SignalR connection is established. If the connection
@@ -127,35 +133,43 @@
         <div class="col-6">
             <h4><a href="/movies/wasm">Movies (WASM)</a></h4>
             <div>
-                <code>@("@rendermode InteractiveWebAssembly")</code>
+                <code>@("@rendermode RenderMode.InteractiveWebAssembly")</code>
             </div>
             <p>
                 This page uses interactive Blazor components in Web Assembly. This page will be pre-rendered on the
-                server, but it runs interactively on the client in WASM. Currently, the server .razor component is
-                just for routing - it displays the WASM component in the ClientApp project, which is referenced in
-                the server app's .csproj.
+                server, but it runs interactively on the client in WASM.
             </p>
             <p>
                 In this case, the "More Info" button will fetch the details of that movie and display it in a modal,
                 just like the SignalR component. However, since this is running on the client, there is a minimal API
                 mapped in the server's Program.cs. The WASM component sends a request to our server, which in turn uses
-                the server's API key to send a request to TMDB's API
+                the server's API key to send a request to TMDB's API.
+            </p>
+            <p>
+                The WASM component is also able to use JavaScript to manipulate the DOM, just like the SSR and SignalR,
+                using JSInterop. The WASM component's code is sent to the client, so a malicious user could potentially
+                see and modify the code it contains.
             </p>
         </div>
         <div class="col-6">
             <h4><a href="/movies/auto">Movies (Auto)</a></h4>
             <div>
-                <code>@("@rendermode InteractiveAuto")</code>
+                <code>@("@rendermode RenderMode.InteractiveAuto")</code>
             </div>
             <p>
                 This is the same component used in the WASM page, but now the framework decides where it runs. Sometimes
-                via SignalR, other times in WASM. In testing, the first time the page loads it is typically in SignalR
-                and a reload typically runs in WASM.
+                via SignalR, other times in WASM. Blazor attempts to render the component in whatever mode is fastest.
+                In testing, the first time the page loads it is typically in SignalR as the WASM code and runtime are
+                downloaded, and a reload will typically switch over to WASM execution.
             </p>
             <p>
                 The component has a <code>Console.WriteLine()</code> that runs after it renders. If it's running in WASM,
                 you'll see the message logged in the JavaScript console. If it's running via SignalR, the message will be
                 logged in the server's terminal output.
+            </p>
+            <p>
+                Because this component <i>may</i> execute in WASM, it must be written with the same considerations as a
+                WASM-only component. This means that any code or resources in the component may be available to the client,
             </p>
         </div>
         <div class="col-12">
