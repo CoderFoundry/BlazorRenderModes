@@ -24,9 +24,13 @@ builder.Services.AddScoped(sp => {
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseWebAssemblyDebugging();
+}
+else
+{
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -39,7 +43,11 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(MovieListWASM).Assembly);
+    .AddAdditionalAssemblies(typeof(BlazorRenderModes.Client._Imports).Assembly);
+
+
+// Minimal API endpoints to proxy requests to TMDB for our client pages
+// this way, our TMDB API key is never visible to the client
 
 app.MapGet("/movie/popular", async ([FromServices] HttpClient http) =>
 {
